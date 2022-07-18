@@ -875,7 +875,6 @@ class SteamGridDB:
 
     def search_game(
         self, 
-        *, 
         term: str
     ) -> Optional[List[Game]]:
         """Searches for games on the website.

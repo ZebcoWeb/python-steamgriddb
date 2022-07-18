@@ -19,15 +19,13 @@ DEALINGS IN THE SOFTWARE.
 """
 
 import requests
-from magic import Magic
+import mimetypes
 from typing import List
 
 from .enums import AssetType
 
-mime = Magic(mime=True)
-
 def asset_validation(asset) -> None:
-    mime_result = mime.from_file(asset)
+    mime_result = mimetypes.guess_type(asset)
     if not mime_result.startswith('image/'):
         raise ValueError('Asset is not a valid image')
     return mime_result
@@ -58,7 +56,7 @@ class HTTPClient:
 
         if not payload['success']:
             error_context = payload['errors'][0]
-            raise Exception(f'API Error: ({responce.status_code}) {error_context}')
+            raise HTTPException(f'API Error: ({responce.status_code}) {error_context}')
 
         return payload['data'] if payload else None
 
@@ -92,7 +90,7 @@ class HTTPClient:
 
         if not payload['success']:
             error_context = payload['errors'][0]
-            raise Exception(f'API Error: ({responce.status_code}) {error_context}')
+            raise HTTPException(f'API Error: ({responce.status_code}) {error_context}')
 
         return payload['data'] if payload else None
 
