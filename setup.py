@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="python-steamgriddb",
-    version="1.0.3",
+    version="1.0.4",
     author="Zebco",
     author_email="zebco1382@gmail.com",
     description="A Python wrapper for SteamGridDB's API",

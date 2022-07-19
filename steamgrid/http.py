@@ -19,16 +19,7 @@ DEALINGS IN THE SOFTWARE.
 """
 
 import requests
-import mimetypes
 from typing import List
-
-from .enums import AssetType
-
-def asset_validation(asset) -> None:
-    mime_result = mimetypes.guess_type(asset)
-    if not mime_result.startswith('image/'):
-        raise ValueError('Asset is not a valid image')
-    return mime_result
 
 class HTTPException(Exception):
     """Exception raised when the HTTP request fails."""
@@ -60,15 +51,8 @@ class HTTPClient:
 
         return payload['data'] if payload else None
 
-    def post(self, endpoint: str, body: dict = None, file_path: str = None) -> dict:
-        if file_path:
-            mime = asset_validation(file_path)
-            with open(file_path, 'rb') as f:
-                files = [('asset', (f.name, f, mime))]
-                self.session.headers.update({'Content-Type': 'multipart/form-data'})
-                responce = self.session.post(endpoint, data=body, files=files)
-        else:
-            responce = self.session.post(endpoint, data=body)
+    def post(self, endpoint: str, body: dict = None) -> dict:
+        responce = self.session.post(endpoint, data=body)
         try: 
             payload = responce.json()
         except requests.exceptions.JSONDecodeError:
@@ -116,14 +100,6 @@ class HTTPClient:
 
         return self.get(url, queries)
 
-    def upload_grid(self, game_id: int, asset: str, style: str):
-        url = self.BASE_URL + '/grids'
-        body = {
-            'game_id': game_id,
-            'style': style,
-        }
-        self.post(url, body, file_path=asset)
-
     def delete_grid(self, grid_ids: List[int]):
         url = self.BASE_URL + '/grids/' + ','.join(str(i) for i in grid_ids)
         self.delete(url)
@@ -141,14 +117,6 @@ class HTTPClient:
             url = self.BASE_URL + '/heroes/' + platform + '/' + ','.join(str(i) for i in game_ids)
 
         return self.get(url, queries)
-
-    def upload_hero(self, game_id: int, asset: str, style: str):
-        url = self.BASE_URL + '/heroes'
-        body = {
-            'game_id': game_id,
-            'style': style,
-        }
-        self.post(url, body, file_path=asset)
 
     def delete_hero(self, hero_ids: List[int]):
         url = self.BASE_URL + '/heroes/' + ','.join(str(i) for i in hero_ids)
@@ -168,13 +136,6 @@ class HTTPClient:
 
         return self.get(url, queries)
 
-    def upload_logo(self, game_id: int, asset: str):
-        url = self.BASE_URL + '/logos'
-        body = {
-            'game_id': game_id,
-        }
-        self.post(url, body, file_path=asset)
-
     def delete_logo(self, logo_ids: List[int]):
         url = self.BASE_URL + '/logos/' + ','.join(str(i) for i in logo_ids)
         self.delete(url)
@@ -187,13 +148,6 @@ class HTTPClient:
 
         return self.get(url, queries)
 
-    def upload_icon(self, game_id: int, asset: str):
-        url = self.BASE_URL + '/icons'
-        body = {
-            'game_id': game_id,
-        }
-        self.post(url, body, file_path=asset)
-
     def delete_icon(self, logo_ids: List[int]):
         url = self.BASE_URL + '/icons/' + ','.join(str(i) for i in logo_ids)
         self.delete(url)
@@ -202,15 +156,3 @@ class HTTPClient:
         url = self.BASE_URL + '/search/autocomplete/' + term
 
         return self.get(url)
-
-    def upvote_asset(self, asset_id: int, asset_type: AssetType) -> None:
-        url = self.BASE_URL + '/' + str(asset_type.value) + '/vote/up/' + str(asset_id)
-        self.post(url)
-
-    def downvote_asset(self, asset_id: int, asset_type: AssetType) -> None:
-        url = self.BASE_URL + '/' + str(asset_type.value) + '/vote/down/' + str(asset_id)
-        self.post(url)
-    
-    def like_asset(self, asset_id: int, asset_type: AssetType) -> None:
-        url = self.BASE_URL + '/' + str(asset_type.value) + '/heart/' + str(asset_id)
-        self.post(url)

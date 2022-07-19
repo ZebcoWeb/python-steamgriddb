@@ -94,8 +94,6 @@ class Asset:
         'thumbnail',
         '_lock',
         '_epilepsy',
-        'upvotes',
-        'downvotes',
         'type',
         'author'
     )
@@ -143,18 +141,6 @@ class Asset:
 
     def to_json(self) -> dict:
         return self._payload
-
-    def upvote(self) -> None:
-        """Upvote the asset."""
-        return self._http.upvote_asset(self.id, self.type)
-
-    def downvote(self) -> None:
-        """Downvote the asset."""
-        return self._http.downvote_asset(self.id, self.type)
-
-    def like(self) -> None:
-        """Like the asset."""
-        return self._http.like_asset(self.id, self.type)
 
     def is_lock(self) -> bool:
         """:class:`bool`: Returns whether the asset is locked."""

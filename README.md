@@ -69,27 +69,15 @@ grid_author = grid.author
 
 # Return grid's score
 grid_score = grid.score
-
-# Return true if grid be nsfw
-grid_is_nsfw = grid.is_nsfw()
 ```
 
 #### Some grid object methods:
 ```python
-# Do some interactions (upvote, downvote, like)
-grid.upvote()
-grid.downvote()
-grid.like()
+# Return true if grid be nsfw
+grid_is_nsfw = grid.is_nsfw()
 
 # Returning the grid as JSONObject
 grid.to_json()
-```
-#### Upload a grid:
-```python
-from steamgrid import StyleType
-
-# Upload an image to the website as Grid with Alternate style
-sgdb.upload_grid(game_id=1234, image_path='path/of/image.png', style=StyleType.Alternate)
 ```
 
 #### Delete a grid
