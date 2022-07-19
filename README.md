@@ -1,7 +1,7 @@
 # python-steamgriddb
 A Python API wrapper for SteamGridDB.com
 
-![PyPI](https://img.shields.io/pypi/v/python-steamgriddb?style=for-the-badge)
+[![PyPI](https://img.shields.io/pypi/v/python-steamgriddb?style=for-the-badge)](https://pypi.python.org/pypi/python-steamgriddb)
 ![APM](https://img.shields.io/apm/l/github?style=for-the-badge)
 
 ### Installation
