@@ -89,6 +89,9 @@ grid.delete()
 sgdb.delete_grid([230227])
 ```
 
+### Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=ZebcoWeb/python-steamgriddb&type=Date)](https://star-history.com/#ZebcoWeb/python-steamgriddb&Date)
 
 ### Donate address:
 
