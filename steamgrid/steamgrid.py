@@ -574,7 +574,7 @@ class SteamGridDB:
             'humor': str(is_humor).lower(),
         }
 
-        payloads = self._http.get_logo(game_ids, 'game', queries=queries)
+        payloads = self._http.get_icon(game_ids, 'game', queries=queries)
         if payloads != []:
             return [Icon(payload, self._http) for payload in payloads]
         return None
@@ -643,7 +643,7 @@ class SteamGridDB:
             'humor': str(is_humor).lower(),
         }
 
-        payloads = self._http.get_logo(
+        payloads = self._http.get_icon(
             game_ids, 
             'platform', 
             platform=platform.value, 
