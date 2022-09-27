@@ -6,7 +6,11 @@ A Python API wrapper for SteamGridDB.com
 
 ### Installation
 ```shell
-pip install python-steamgriddb
+pip install -U python-steamgriddb
+```
+or
+```shell
+pip install -U git+https://github.com/ZebcoWeb/python-steamgriddb.git
 ```
 
 ## Getting Started
