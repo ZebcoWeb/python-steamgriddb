@@ -26,6 +26,7 @@ __all__ = [
     'StyleType',
     'MimeType',
     'ImageType',
+    'StylesIcon'
 ]
 
 class PlatformType(Enum):
@@ -70,6 +71,13 @@ class AssetType(Enum):
     Hero = 'heroes'
     Logo = 'logoes'
     Icon = 'icons'
+
+    def __str__(self) -> str:
+        return self.name
+
+class StylesIcon(Enum):
+    Official = 'official'
+    Custom = 'custom'
 
     def __str__(self) -> str:
         return self.name
