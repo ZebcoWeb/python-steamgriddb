@@ -26,7 +26,8 @@ from .enums import (
     StyleType, 
     MimeType, 
     ImageType,
-    PlatformType
+    PlatformType,
+    StylesIcon
 )
 from .asset import *
 
@@ -518,7 +519,7 @@ class SteamGridDB:
     def get_icons_by_gameid(
         self,
         game_ids: List[int],
-        styles: List[StyleType] = [],
+        styles: List[StylesIcon] = [],
         mimes: List[MimeType] = [],
         types: List[ImageType] = [],
         is_nsfw: bool = False,
@@ -556,7 +557,7 @@ class SteamGridDB:
         if not isinstance(game_ids, List):
             raise TypeError('\'game_ids\' must be a list of integers.')
         if not isinstance(styles, List):
-            raise TypeError('\'styles\' must be a list of StyleType.')
+            raise TypeError('\'styles\' must be a list of StylesIcon.')
         if not isinstance(mimes, List):
             raise TypeError('\'mimes\' must be a list of MimeType.')
         if not isinstance(types, List):
@@ -583,7 +584,7 @@ class SteamGridDB:
         self,
         game_ids: List[int],
         platform: PlatformType,
-        styles: List[StyleType] = [],
+        styles: List[StylesIcon] = [],
         mimes: List[MimeType] = [],
         types: List[ImageType] = [],
         is_nsfw: bool = False,
@@ -597,7 +598,7 @@ class SteamGridDB:
             The game ids of the games.
         platform: :class:`PlatformType`
             The platform type of the icons.
-        styles: List[:class:`StyleType`]
+        styles: List[:class:`StylesIcon`]
             The styles of the icons. Defaults to all styles.
         mimes: List[:class:`MimeType`]
             The mimes of the icons. Defaults to all mimes.
@@ -625,7 +626,7 @@ class SteamGridDB:
         if not isinstance(platform, PlatformType):
             raise TypeError('\'platform\' must be a PlatformType.')
         if not isinstance(styles, List):
-            raise TypeError('\'styles\' must be a list of StyleType.')
+            raise TypeError('\'styles\' must be a list of StylesIcon.')
         if not isinstance(mimes, List):
             raise TypeError('\'mimes\' must be a list of MimeType.')
         if not isinstance(types, List):
